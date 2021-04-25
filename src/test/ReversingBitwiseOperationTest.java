@@ -17,10 +17,10 @@ class ReversingBitwiseOperationTest {
 
     @Test
     void test(){
-        int[] a = {2};
-        int[] b = {3};
-//        reversingBitwiseOperation.encodeArray(a,b, 1);
-        System.out.println(reversingBitwiseOperation.decodeInteger(196610)
-        );
+        int[] a = {2, 3, 4, 5};
+        int[] b = {3, 4, 5, 6};
+        assertNotNull(a);
+        assertNotNull(b);
+        reversingBitwiseOperation.encodeArray(a,b, 4);
     }
 }

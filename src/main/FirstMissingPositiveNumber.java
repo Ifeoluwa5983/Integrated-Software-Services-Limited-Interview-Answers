@@ -8,38 +8,55 @@ public class FirstMissingPositiveNumber {
 
 
     public int getFirstMissingPositiveNumber(Integer [] array){
-        Set<Integer> myNumber = new HashSet<>(Arrays.asList(array));
-        Integer[] sortedArray = new Integer[myNumber.size()];
-        myNumber.toArray(sortedArray);
-        Arrays.sort(sortedArray);
 
-        int firstMissingPositiveNumber = 0;
+        // sort array
+        Arrays.sort(array);
 
-        for (int index = 0; index < sortedArray.length; index++){
+        // eliminate duplicate values
+        Set<Integer> uniqueValues = new HashSet<>(Arrays.asList(array));
 
-            if(sortedArray[index] != index){
+        // initialize an array with uniqueValues' size
+        Integer[] newArray = new Integer[uniqueValues.size()];
 
-                    if (!contains(index, sortedArray) && index > 0){
-                        firstMissingPositiveNumber = index;
-                        break;
-                    }
+        // populate the newArray with the uniqueValue values
+        uniqueValues.toArray(newArray);
 
-                    if(contains(index, sortedArray) && (index == sortedArray.length-1)) {
-                        firstMissingPositiveNumber = sortedArray[index] + 1;
-                        break;
-                    }
-            }
+        // init result
+        int result = 0;
+
+        // loop through the the newArray
+        for (int index = 0; index < newArray.length; index++){
+
+                // check if the value(index) does not exist in the array && the index is greater than 0
+                if (!contains(index, newArray) && index > 0){
+                    result = index;
+                    break;
+                }
+
+                // check if the value(index) exist in the array && is the last, the adds one
+                if(contains(index, newArray) && (index == newArray.length-1)) {
+                    result = newArray[index] + 1;
+                    break;
+                }
         }
 
-        return firstMissingPositiveNumber;
+        // return the result
+        return result;
     }
 
     private boolean contains(int index, Integer[] array) {
+
+        // loop through the array
         for (int i = 0; i < array.length; i++) {
+
+            // check if the vale(index) is in the array
             if (array[i] == index) {
+                // returns true if it does
                 return true;
             }
         }
+
+        // returns false if it doesn't
             return false;
     }
 }
